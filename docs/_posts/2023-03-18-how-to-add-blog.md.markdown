@@ -11,7 +11,7 @@ categories: random
 ## Hello
 
 
-wowoow
+After 3 hours. I learnt one lession. Git + Windows = A piece of shit.
 
 
 
