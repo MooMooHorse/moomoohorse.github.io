@@ -16,8 +16,8 @@ urls:
       url: /blog
 #    - text: Gallery
 #      url: /gallery
-#    - text: Shop
-#      url : /shop
+    - text: Comment Policy
+      url : /comment-policy
     - text: Contact
       url : /contact
 
