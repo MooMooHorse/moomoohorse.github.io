@@ -5,7 +5,7 @@ summary: "Middle layer of File System Design"
 author: moomoohorse
 date: '2023-03-19 13:33:08 -0500'
 category: ['filesystem', 'memory']
-thumbnail: /assets/img/authors/moomoohorse.png
+thumbnail: /assets/img/posts/vfs.png
 keywords: VFS, Direct IO, Page Cache.
 permalink: /blog/vfs-dio-page-cahe
 usemathjax: true
@@ -13,9 +13,13 @@ usemathjax: true
 
 # VFS Layout
 
-
+Thanks [Sergey Klyaus](https://myaut.github.io/dtrace-stap-book/kernel/fs.html) for providing such great VFS diagrams. And I use one of them as cover.
 
 ## DIO and Page Cache
+
+In linux we have memory management system below. 
+
+<img src = "/assets/img/posts/mm.png"> 
 
 DIO stands for Direct I/O, which is a method of performing I/O operations directly to and from the user-space application buffer without involving the kernel's page cache. In traditional I/O, data is first read or written to the kernel's page cache, and then transferred to or from the application's buffer. Direct I/O bypasses the page cache and directly reads from or writes to the storage device.
 
@@ -884,15 +888,15 @@ EXPORT_SYMBOL(nobh_write_end);
 
 ### So, what's VFS?
 
-1. For VFS, our destination (storage) is memory, can we use page cache, isn't that redundant?
+- For VFS, our destination (storage) is memory, can we use page cache, isn't that redundant?
 
 While it may seem redundant to use the page cache when writing to memory, it is actually an important part of the kernel's I/O subsystem and provides a consistent and efficient interface for managing memory pages, regardless of where they are stored.
 
-- More importantly, VFS doesn't handle the storage device directly.
+* More importantly, VFS doesn't handle the storage device directly.
 
-- Wait what?
+Wait what?
 
-2. so what's the target device for VFS, memory or disk?
+- So what's the target device for VFS, memory or disk?
 
 he target device for VFS depends on the specific filesystem that is being used. In general, VFS provides a uniform interface for accessing different types of filesystems, including those that use disks as their target storage device (e.g. ext4) and those that use memory (e.g. tmpfs).
 
@@ -900,10 +904,12 @@ When VFS receives a write request, it does not necessarily know whether the targ
 
 In the case of memory-based filesystems like tmpfs, the page cache is used as an intermediary layer between the VFS and the underlying memory storage device. This allows the filesystem to take advantage of the caching and memory management capabilities provided by the kernel's page cache subsystem. In contrast, filesystems that target disks typically use their own caching mechanisms and may interact with the disk directly, bypassing the page cache.
 
-3. so VFS never handles the read write to file system alone? Must it resort to other file system like tmpfs or ext4?
+* So VFS never handles the read write to file system alone? Must it resort to other file system like tmpfs or ext4?
 
 That's correct. VFS provides a generic interface for file system operations, but it does not directly handle the storage of files. Instead, it relies on specific file systems such as tmpfs or ext4 to handle the storage and retrieval of data. These file systems implement the file system operations defined by VFS, such as reading and writing data to disk or other storage devices, and provide VFS with the necessary information to manage files and directories in a consistent way across different file systems.
 
-4. So VFS is an interface connecting file systems and other subsystems in linux ike memory management system such as page cache, is that correct?
+* So VFS is an interface connecting file systems and other subsystems in linux ike memory management system such as page cache, is that correct?
 
 Yes, that's correct. The VFS provides a standard interface for file systems to interact with the rest of the kernel, including the memory management system (like the page cache) and the system calls used to read and write files. By defining this standard interface, different file systems can be easily added to the kernel and used by applications without needing to know the specific details of each file system's implementation.
+
+
