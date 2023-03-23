@@ -149,6 +149,18 @@ In this example, we define a route for handling GET requests to `/api/users`, an
 
 By using GET and POST requests in combination with Express and Axios in our NodeJS hosting environment, we can create a powerful and flexible API that allows different applications to communicate with each other and exchange data.
 
+### APIs are NOT real files
+
+APIs are not real files because they are not physical files that exist on the server's file system. Instead, APIs are typically implemented as server-side functions or modules that handle HTTP requests and responses.
+
+When a client-side application sends an HTTP request to an API endpoint, the server-side code that handles that endpoint is executed in response to the request. This code can perform any number of operations, including retrieving data from a database, performing calculations, or returning data to the client-side in a specific format.
+
+The server-side code that implements an API is typically written using a programming language like NodeJS, and is executed by the NodeJS runtime environment. This code is not stored in a file that can be accessed or viewed directly from the server's file system, but rather exists in memory as a running program.
+
+While it is possible to write server-side code that reads data from files on the server's file system, this is not typically done in the context of an API. Instead, data is typically stored in a database or other data storage system, and is retrieved or updated using server-side code that handles HTTP requests and responses.
+
+So in summary, APIs are not real files because they are implemented as server-side code that handles HTTP requests and responses, and are not stored as physical files on the server's file system.
+
 ### Express and Axois : Communication between server and client
 
 In a NodeJS development environment, the router plays a critical role in handling incoming HTTP requests and routing them to the appropriate server-side code. The router is responsible for matching URLs to specific server-side functions or modules, and for handling different HTTP methods such as GET, POST, and DELETE.
@@ -184,9 +196,17 @@ In Express, the `app.use()` method is used to mount middleware functions at a sp
 It's okay to have two router files both have `get('/',...)` because they are mounted at different paths. For example, we could have a mainRouter that handles the root directory `'/'` and a usersRouter that handles `'/users'`. These routers can have different logic for handling incoming HTTP requests, but they won't conflict because they are mounted at different paths.
 
 ### What's root directory ('/') to request?
-In HTTP, the root directory `'/'` refers to the home directory of the website. When a client sends an HTTP request to `'/'`, they are essentially asking for the default page of the website.
+In a NodeJS hosting environment, the root directory (`'/'`) refers to the root directory of the website being served by the server. This is different from the root directory of the server's file system, which is often inaccessible from the client-side.
 
-In the context of our NodeJS hosting website, we use `app.use('/', indexRouter)` to mount our indexRouter at the root directory. This means that any incoming HTTP requests to `'/'` will be handled by the indexRouter.
+When we define a route in our Express server using `app.use()`, we specify the root directory as the first argument to the function. For example:
+
+```javascript
+app.use('/', router);
+```
+
+In this example, we're telling Express to use the `router` middleware for all HTTP requests that match the root directory (`'/'`). This means that any request to our website that starts with `http://www.example.com/` will be handled by the `router` middleware.
+
+It's important to note that the root directory of our website may be different from the root directory of our server's file system. While we can access files and directories on the server's file system using NodeJS's file system module, these files and directories are not accessible from the client-side.
 
 ### How does app.js know our views are in format of .ejs and how does it know that our view engine is in views directory?
 
