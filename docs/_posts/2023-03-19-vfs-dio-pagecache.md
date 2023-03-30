@@ -19,7 +19,7 @@ Thanks [Sergey Klyaus](https://myaut.github.io/dtrace-stap-book/kernel/fs.html) 
 
 In linux we have memory management system below. 
 
-<img src = "/assets/img/posts/mm.png"> 
+<img src = "../assets/img/posts/mm.png"> 
 
 DIO stands for Direct I/O, which is a method of performing I/O operations directly to and from the user-space application buffer without involving the kernel's page cache. In traditional I/O, data is first read or written to the kernel's page cache, and then transferred to or from the application's buffer. Direct I/O bypasses the page cache and directly reads from or writes to the storage device.
 
