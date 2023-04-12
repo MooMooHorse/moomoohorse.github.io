@@ -198,6 +198,10 @@ list
 
 > A page in the page cache can consist of multiple noncontiguous physical disk blocks. For example, a physical page is 4KB in size on the x86 architecture, whereas a disk block on many filesystems can be as small as 512 bytes. Therefore, 8 blocks might fit in a single page. The blocks need not be contiguous because the files might be laid out all over the disk. 
 
+## Why page cache if we have buffer head?
+
+> The purpose of a buffer head is to describe this mapping between the on-disk block and the physical in-memory buffer (which is a sequence of bytes on a specific page). Acting as a descriptor of this buffer-to-block mapping is the data structure’s only role in the kernel.
+
 ## The Use of Page Cache on 2B SSD
 
 ### Operation Oriented Analysis
