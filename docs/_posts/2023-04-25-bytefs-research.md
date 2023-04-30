@@ -83,4 +83,87 @@ to be continue...
 
 (It's my final week of the semester so I don't have time for this, but I will come back and try to finish this article)
 
+## Scripts
+
+Run YCSB (no cache)
+
+```bash
+#!/bin/bash
+
+workloads=( "workloada" "workloadb" "workloadc" "workloadd" "workloade" "workloadf" )
+output_folder="/home/h/output_nocache"
+
+# iterate over the workloads until an unlogged workload is found
+for workload in "${workloads[@]}"; do
+    log_file="$output_folder/$workload.log"
+    if ! [ -f "$log_file" ]; then
+        # the log file does not exist, this is an unlogged workload
+        touch "$log_file"
+        current_workload="$workload"
+        break
+    fi
+done
+
+# if no unlogged workload was found, exit with an error message
+if [ -z "$current_workload" ]; then
+    echo "All workloads have already been logged."
+    exit 1
+fi
+
+echo "Running workload $current_workload"
+
+mkfs.ext4 /dev/vdb && mount -t ext4 /dev/vdb dd/ && ./patch_filebench.sh
+./Byte_fs/utils/ctrl 906 76800
+cd ./YCSB
+./bin/ycsb load rocksdb -s -P "workloads/$current_workload" -p rocksdb.dir=/mnt/h/dd -threads 100 
+cd ../
+./Byte_fs/utils/ctrl 40
+cd ./YCSB
+./bin/ycsb run rocksdb -s -P "workloads/$current_workload" -p rocksdb.dir=/mnt/h/dd -threads 32 > "$output_folder/$current_workload.log"
+echo "======================" >> "$output_folder/$current_workload.log"
+cd ../
+./Byte_fs/utils/ctrl 42 >> "$output_folder/$current_workload.log"
+```
+
+Run YCSB (with cache)
+
+```bash
+#!/bin/bash
+
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <workload_name>"
+    exit 1
+fi
+
+workload="$1"
+log_file="/home/h/output/$workload.log"
+touch "/home/h/output/$workload.log"
+
+mkfs.ext4 /dev/vdb && mount -t ext4 /dev/vdb dd/ && ./patch_filebench.sh
+cd ./YCSB
+./bin/ycsb load rocksdb -s -P "workloads/$workload" -p rocksdb.dir=/mnt/h/dd -threads 100 
+cd ../
+./Byte_fs/utils/ctrl 40
+cd ./YCSB
+./bin/ycsb run rocksdb -s -P "workloads/$workload" -p rocksdb.dir=/mnt/h/dd -threads 32 > "/home/h/output/$workload.log"
+echo "======================" >> "/home/h/output/$workload.log"
+cd ../
+./Byte_fs/utils/ctrl 42 >> "/home/h/output/$workload.log"
+```
+
+Patch filebench
+
+```bash
+echo 0 | sudo tee /proc/sys/kernel/randomize_va_space
+```
+
+Module install
+
+```bash
+make -j60 modules_install && make install
+```
+
+kernel config file is 
+
+[config](../assets/files/config.txt)
 
