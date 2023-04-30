@@ -167,3 +167,4 @@ kernel config file is
 
 [config](../assets/files/config.txt)
 
+[FS-compare](https://www.electronicdesign.com/industrial-automation/article/21804944/whats-the-difference-between-linux-ext-xfs-and-btrfs-filesystems)
