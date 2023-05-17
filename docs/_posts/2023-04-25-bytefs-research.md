@@ -60,28 +60,72 @@ After 6 months, I could say that a file system accelerates generic file operatio
 
 ## Why Byte FS?
 
+The necessity to build a new file system is under lots of questions. Even NOVA, a very successful file system is still controversial. 
+
+We need to show it to people, that old file systems are unable to suit the new byte addressable SSD. 
+
+But is it true?
+
+Actually it's not ture. This makes ByteFS a hybrid of existing file system of byte addressable file system with block interface. But we have an internal log-maintained structure to guarantee consistency and to improve speed as well as lowering IO amplification, which makes it impossible to simply migrate to any existing byte-addressable file system, and it's inherently against our motivation to use block-addressable file system like ext4 and f2fs. Although temporary they might out-perform many byte-addressable file system because their sophisticated software caching. In the long run, they will be replaced if Byte-addressable SSD becomes a trend.
+
+This is why we build ByteFS, by modifying old byte addressable file system and to improve their performance and adapt them to byte-addressable SSD.
+
 ## My Undergraduate Research
+My undergraduate research starts from the 2nd semester as a junior student. The pressure is quite large as I have to finish my regular courses and be a course assitant holding lots of office hours while putting ~30 hours a week into this project.
+
+I found a lot of things that can be improved during this time. Bytefs is not a project that goes smoothly and gives nice result immediately. I met and solved lots of problems as I was working my way out with 2 phD-candidate students.
+
+I think I need to summarize them so when I continue my research, I can stop stepping into these traps again.
 
 ### Communication
 
+> Among all the meetings I have with prof, only 0 meetings went very smoothly. Most of the time, 3 of us just seat in his office.
+>
+> The implementation as well as the idea of the project got re-structured too many times. 
+>
+> One time we throw away a solution that's been developed for 1 year.
+
+Communication with prof. and your colleagues is extremely crucial because that's like several layers of sanity check when you're developing your project.
+
 ### Planning and Thinking
+
+The simplicity of a project & ideas are the most important thing after looking at all ideas that are popular.
+
+**If it's complicated and hard to use your own words to explain it, you fucked up.**
+
+Planning after having a clear idea is very critical. 
+
+**Don't burn the midnight oil even when every one is pushing you.**
+
+If you're 1 day away from deadline and you haven't finished it, you fucked up.
+
+Start summarizing your failure and try to finish it next time.
 
 ### Measure : Engineering and Science
 
+Get the data as fast as possible, because you're not sure if this method works.
+
+It's not a project that must work out, so you need to find the probablity for you to get the number by getting a number as fast as possible.
+
+Don't build a project if there can be a project.
+
+**Use dirty means to acheive this if you can (Fake equivalent solutions).** This is not faking data, it's a sanity check.
+
 ### Designs
+
+Have a design before implementing it.
 
 ### Tools and Setups
 
+Write a script. Find a great setup or you need to write 10000 lines of code or spend 10 minutes every time you want to get a number.
+
 ### Working with phds
+
+Don't trust seniors that easily. They are people and are prone to mistakes just like you.
 
 ### Time commitment
 
-
-I know :(  too many blanks are unfilled.
-
-to be continue... 
-
-(It's my final week of the semester so I don't have time for this, but I will come back and try to finish this article)
+Start early.
 
 ## Scripts
 
