@@ -149,13 +149,6 @@ Detailed Explanation [paper](https://www.usenix.org/system/files/conference/usen
 - Can be used in any of previous operation. (Operation Abitrary)
 - Multi-threaded can be stopped with time gaps for a certain amount of read / write or a certain amount of bytes read / written
 
----
-
-### Read / Write # files
-
-- randomly pick k files to encrypt
-- pick files with size between [l, r]
-
 --- 
 
 ## File System Image
