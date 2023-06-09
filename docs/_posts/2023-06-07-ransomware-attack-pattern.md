@@ -31,13 +31,13 @@ Slides are in
 
 1. Operation sequence of ransomware = $N1 = 3$ 
 2. R W type of each operation       = $N2 = 2$
-3. Characteristics of each R W type = $N3 = 5$
+3. Characteristics of each R W type = $N3 = 16$
 4. File System Image for each attack patttern = $N4 = 27$
 
 \# Test cases ($N$) for each storage system :
 
 $$
-N = N1 \times N2 \times N3 \times N4 = 810
+N = N1 \times N2 \times N3 \times N4 = 2592
 $$
 
 
@@ -133,11 +133,10 @@ This can be used to test the resilience of storage system.
 
 ## Characteristics of each R W type 
 
-- **Time gaps** between a certain amount of reads / writes or a certain amount of bytes read / written 
+- **Time gaps** between a certain amount of reads / writes or a certain amount of bytes read / written (0s / 10s)
 - **sequential / random** access pattern 
-- **size** of chunk / minimum R W length
-- \# chunks / bytes each operation issues
-- **threads** used to R W
+- \# chunks / bytes each operation issues (1 * 4096 / 25000 * 4096)
+- **threads** used to R W (1 / 8)
 ---
 
 ### Sequential / Random Access Pattern
