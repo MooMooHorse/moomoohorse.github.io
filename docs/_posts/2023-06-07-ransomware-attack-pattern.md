@@ -59,7 +59,10 @@ Although real-world ransomware heavily relies on these traits, they are irreleva
 
 ## Operation sequence of ransomware
 
-- Different Read / Write / Create / Unlink / Erase sequences.
+3 cases :
+- Read Encrypt Overwrite
+- Read Encrypt Create(New) Write Delete(Original)
+- Read Encrypt Create(New) Write Shred(Original)
 
 ---
 
