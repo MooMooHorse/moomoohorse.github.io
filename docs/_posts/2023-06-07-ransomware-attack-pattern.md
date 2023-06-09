@@ -83,23 +83,6 @@ Detailed Explanation [paper](https://www.usenix.org/system/files/conference/usen
 
 ---
 
-## Rare Patterns of Ransomware
-
-Besides sequence of Read / Write / Create / Unlink / Erase Operations, what other things can ransomware do?
-
----
-
-### Corrupting MFT / Inode Table (Indexing)
-
-> attack that encrypted the Master File Table (MFT) of victims, but did not unlock it after payment. Encrypting the MFT renders the content of a hard drive unusable, and is rarely used among ransomware families. 
-
-
-This can be used to test the resilience of storage system.
-
-- After partially corrupted disk, how much unencrypted data are there?
-
-
----
 
 ## R / W types obtained from our study
 
@@ -202,3 +185,25 @@ We use a set of FS metadata (parameters) as base, only changing 3 sets of attrib
 #### More explanation on fragmentation score
 
 > A layout score of 1 means all files in the file system are laid out optimally on disk (i.e., all blocks of any given file are laid out consecutively one after the other), while a layout score of 0 means that no two blocks of any file are adjacent to each other on disk
+
+
+---
+
+
+## Rare Patterns of Ransomware
+
+Besides sequence of Read / Write / Create / Unlink / Erase Operations, what other things can ransomware do?
+
+---
+
+### Corrupting MFT / Inode Table (Indexing)
+
+> attack that encrypted the Master File Table (MFT) of victims, but did not unlock it after payment. Encrypting the MFT renders the content of a hard drive unusable, and is rarely used among ransomware families. 
+
+
+This can be used to test the resilience of storage system.
+
+- After partially corrupted disk, how much unencrypted data are there?
+
+
+---
