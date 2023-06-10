@@ -30,14 +30,14 @@ Slides are in
 # Ransomware Attack Patterns & Attacked System's File Distribution
 
 1. Operation sequence of ransomware = $N1 = 3$ 
-2. R W type of each operation       = $N2 = 2$
-3. Characteristics of each R W type = $N3 = 16$
-4. File System Image for each attack patttern = $N4 = 27$
+2. R W type of each operation       = $N2 = 4$
+3. Characteristics of each R W type = $N3 = (4+4+1+16)*16 = 25*16$
+4. File System Image for each attack patttern = $N4 = 81$
 
 \# Test cases ($N$) for each storage system :
 
 $$
-N = N1 \times N2 \times N3 \times N4 = 2592
+N = N1 \times N2 \times N3 \times N4 = 972000
 $$
 
 
@@ -117,8 +117,10 @@ Detailed Explanation [paper](https://www.usenix.org/system/files/conference/usen
 ## Characteristics of each R W type 
 
 - **Time gaps** between a certain amount of reads / writes or a certain amount of bytes read / written (0s / 10s)
-- **sequential / random** access pattern 
 - \# chunks / bytes each operation issues (1 * 4096 / 25000 * 4096)
+
+Just for R / W in chunk
+- **sequential / random** access pattern 
 - **threads** used to R W (1 / 8)
 ---
 
@@ -163,9 +165,10 @@ We use a set of FS metadata (parameters) as base, only changing 3 sets of attrib
 
 ---
 
-### 3 Sets of indepedent attributes 
+### 4 Sets of indepedent attributes 
 
-* FS used Image size  (10MB, 1GB, 100GB)
+* FS used Image size  (10MB, 1GB, 100GB) [System Size]
+* Injected files size 1%, 20%, 100% but at most 100MB
 * File Size Distribution (Peak at : Small, Medium, Large Size files )
   * Peak at Small $\mu = 2, \chi_M = 50\ \text{MB}$
   * Peak at Medium $\mu = 9.48, \chi_M = 512\ \text{MB}$
