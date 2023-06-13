@@ -8,7 +8,7 @@ category: ['research']
 thumbnail: /assets/img/posts/DFS.png
 keywords: undergraduate-research
 permalink: /blog/ransomware_attack_pattern
-usemathjax: true
+usemathjax: true22
 marp : true
 theme : gaia 
 class : invert
@@ -31,13 +31,13 @@ Slides are in
 
 1. Operation sequence of ransomware = $N1 = 3$ 
 2. R W type of each operation       = $N2 = 4$
-3. Characteristics of each R W type = $N3 = (4+4+1+16)*16 = 25*16$
+3. Characteristics of each R W type = $N3 = 256$
 4. File System Image for each attack patttern = $N4 = 81$
 
 \# Test cases ($N$) for each storage system :
 
 $$
-N = N1 \times N2 \times N3 \times N4 = 972000
+N = N1 \times N2 \times N3 \times N4 = 248,832
 $$
 
 
@@ -118,10 +118,9 @@ Detailed Explanation [paper](https://www.usenix.org/system/files/conference/usen
 
 - **Time gaps** between a certain amount of reads / writes or a certain amount of bytes read / written (0s / 10s)
 - \# chunks / bytes each operation issues (1 * 4096 / 25000 * 4096)
-
-Just for R / W in chunk
-- **sequential / random** access pattern 
+- **fsync** probability [motivated by F2FS paper below]
 - **threads** used to R W (1 / 8)
+- **sequential / random** access pattern 
 ---
 
 ### Sequential / Random Access Pattern
@@ -157,7 +156,7 @@ Just for R / W in chunk
 
 > The performance of file systems and related software depends on characteristics of the underlying file-system image (i.e., file-system metadata and file contents).
 
-We use a set of FS metadata (parameters) as base, only changing 3 sets of attributes to obtain 27 sets of FS distribution.
+We use a set of FS metadata (parameters) as base, only changing 4 sets of attributes to obtain 81 sets of FS distribution.
 
 > The snapshots of file-system metadata were collected over a five-year period representing over 60, 000 Windows PC file systems in a large corporation.
 
@@ -167,12 +166,12 @@ We use a set of FS metadata (parameters) as base, only changing 3 sets of attrib
 
 ### 4 Sets of indepedent attributes 
 
-* FS used Image size  (10MB, 1GB, 100GB) [System Size]
-* Injected files size 1%, 20%, 100% but at most 100MB
+* FS used Image size  (100MB, 1GB, 100GB) [System Size]
+* Injected files size 1%, 20%, 100% but at most 200MB
 * File Size Distribution (Peak at : Small, Medium, Large Size files )
-  * Peak at Small $\mu = 2, \chi_M = 50\ \text{MB}$
-  * Peak at Medium $\mu = 9.48, \chi_M = 512\ \text{MB}$
-  * Peak at Large $\mu = 15, \chi_M = 4096\ \text{MB}$
+  * Peak at Small $\mu = 4,  \text{MB}$
+  * Peak at Medium $\mu = 9.48, \ \text{MB}$
+  * Peak at Large $\mu = 17\ \text{MB}$
 
 * Fragmentation Degree (score = 0, 0.5, 1)
 
@@ -203,3 +202,15 @@ This can be used to test the resilience of storage system.
 
 
 ---
+
+## Attack GC 
+
+Taking F2FS as an example.
+
+> Foreground cleaning is triggered only when there are not enough free sections, while a kernel thread wakes up periodically to conduct cleaning in background. 
+
+[paper](https://www.usenix.org/system/files/conference/fast15/fast15-paper-lee.pdf)
+
+* Do significant amount of create - fsync - delete to reclaim old logs that contain recoverable blocks. 
+---
+
