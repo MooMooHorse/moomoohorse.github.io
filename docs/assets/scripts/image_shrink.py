@@ -18,11 +18,20 @@ curFilePath = os.path.dirname(os.path.realpath(__file__))
 docPath = os.path.dirname(os.path.dirname(curFilePath))
 postPath = os.path.join(docPath, "_posts")
 
-def resize(input_image_path, output_image_path, percentage):
+def resize(input_image_path, output_image_path, percentage, auto=False):
+    """
+    if auto is False : resize the image to the given percentage
+    if auto is True : resize the image so that it fits the website.
+    The website needs an image whose width is 850px to 1000 px.
+    """
     image = Image.open(input_image_path)
     width, height = image.size
-    new_width = int(width * percentage / 100)
-    new_height = int(height * percentage / 100)
+    if auto:
+        new_width = 1000
+        new_height = int(height * new_width / width)
+    else:
+        new_width = int(width * percentage / 100)
+        new_height = int(height * percentage / 100)
     new_image = image.resize((new_width, new_height))
     print("Image resized from {}x{} to {}x{}".format(width, height, new_width, new_height))
     print("Saving image to {}".format(output_image_path))
@@ -39,6 +48,7 @@ def handle_flags():
     """
     global curFilePath, docPath, postPath
     dateproc = []
+    ifRecover = False
     for arg in sys.argv[1:]:
         if arg.startswith("-date="):
             dateproc = arg[6:].split(",")
@@ -50,11 +60,13 @@ def handle_flags():
             dateproc.sort()
             # get the latest date
             dateproc = dateproc[-1:]
+        elif arg.startswith("-recover"):
+            ifRecover = True
         else:
             print("Error: invalid flag")
             return None
         
-    return dateproc
+    return dateproc, ifRecover
 
 def proc_post(fpath):
     """
@@ -85,7 +97,7 @@ def proc_post(fpath):
                 imgname = "shrink_" + imgname
                 imgpath = os.path.join(os.path.dirname(originalImgPath), imgname)
                 print(f"Shrinking image {originalImgPath} to {imgpath}")
-                resize(originalImgPath, imgpath, 50)
+                resize(originalImgPath, imgpath, 50, auto=True)
                 # # replace the image path (only replace the basename)
                 newline = line.replace(os.path.basename(originalImgPath), imgname)
                 print("Replacing {} with {}".format(line, newline))
@@ -100,11 +112,12 @@ def recover_post(fpath):
     Revert the effect done by proc_post.
     We should find all the image basename, and remove the shrink_ prefix.
     """
-
+    write_lines = []
     with open(fpath, "r", encoding="utf-8") as f:
         lines = f.readlines()
         for line in lines:
             import re
+            newline = None
             m = re.search(r"!\[.*\]\((.*)\)", line)
             if m:
                 imgpath = m.group(1)
@@ -123,9 +136,14 @@ def recover_post(fpath):
                 imgname = imgname[7:] # remove the shrink_ prefix
                 newline = line.replace(os.path.basename(originalImgPath), imgname)
                 print("Replacing {} with {}".format(line, newline))
+            if newline is None:
+                newline = line
+            write_lines.append(newline)
+    with open(fpath, "w", encoding="utf-8") as f:
+        f.writelines(write_lines)
 
 def main():
-    dateproc = handle_flags()
+    dateproc, ifRecover = handle_flags()
     if not os.path.exists(postPath):
         print("Error: post path not found")
         return
@@ -135,7 +153,10 @@ def main():
             if date in dateproc:
                 fpath = os.path.join(postPath, filename)
                 print("Processing {}".format(fpath))
-                proc_post(fpath)
+                if ifRecover:
+                    recover_post(fpath)
+                else:
+                    proc_post(fpath)
 
 if __name__ == "__main__":
     main()

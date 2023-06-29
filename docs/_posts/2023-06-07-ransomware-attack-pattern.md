@@ -68,7 +68,7 @@ Detailed Explanation [paper](https://www.usenix.org/system/files/conference/usen
 
 ---
 
-![center w:600 h:500](../assets/img/posts/shrink_rans_att1.png)
+![center w:600 h:500](../assets/img/posts/rans_att1.png)
 
 
 
@@ -84,7 +84,7 @@ Detailed Explanation [paper](https://www.usenix.org/system/files/conference/usen
 
 ### R W continously 
 
-![center h:500 w:600](../assets/img/posts/shrink_reovw.png)
+![center h:500 w:600](../assets/img/posts/reovw.png)
 
 ---
 
@@ -96,7 +96,7 @@ Detailed Explanation [paper](https://www.usenix.org/system/files/conference/usen
 
 ### Read Write chunk by chunk
 
-![center h:500 w:600](../assets/img/posts/shrink_rwcc.png)
+![center h:500 w:600](../assets/img/posts/rwcc.png)
 
 
 ---
@@ -123,7 +123,7 @@ Detailed Explanation [paper](https://www.usenix.org/system/files/conference/usen
 
 ---
 
-![center h:500 w:600](../assets/img/posts/shrink_rwccc.png)
+![center h:500 w:600](../assets/img/posts/rwccc.png)
 
 
 
@@ -133,7 +133,7 @@ Detailed Explanation [paper](https://www.usenix.org/system/files/conference/usen
 ### Multi-threaded R / W
 
 
-![center h:500 w:600](../assets/img/posts/shrink_rwmtt.png)
+![center h:500 w:600](../assets/img/posts/rwmtt.png)
 
 ---
 
