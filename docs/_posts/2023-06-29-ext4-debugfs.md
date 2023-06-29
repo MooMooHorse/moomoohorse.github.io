@@ -7,7 +7,7 @@ date: '2023-06-29 16:19:35 -0500'
 category: ['research']
 thumbnail: /assets/img/posts/dbgfs.png
 keywords: undergraduate-research
-permalink: /blog/dbgfs.png
+permalink: /blog/dbgfs
 usemathjax: true22
 ---
 
