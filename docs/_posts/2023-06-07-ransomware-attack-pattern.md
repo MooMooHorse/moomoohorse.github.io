@@ -68,7 +68,7 @@ Detailed Explanation [paper](https://www.usenix.org/system/files/conference/usen
 
 ---
 
-![center w:1100 h:500](../assets/img/posts/rans_att1.png)
+![center w:600 h:500](../assets/img/posts/rans_att1.png)
 
 
 
@@ -84,7 +84,7 @@ Detailed Explanation [paper](https://www.usenix.org/system/files/conference/usen
 
 ### R W continously 
 
-![center h:500 w:1100](../assets/img/posts/reovw.png)
+![center h:500 w:600](../assets/img/posts/reovw.png)
 
 ---
 
@@ -96,7 +96,7 @@ Detailed Explanation [paper](https://www.usenix.org/system/files/conference/usen
 
 ### Read Write chunk by chunk
 
-![center h:500 w:1100](../assets/img/posts/rwcc.png)
+![center h:500 w:600](../assets/img/posts/rwcc.png)
 
 
 ---
@@ -123,7 +123,7 @@ Detailed Explanation [paper](https://www.usenix.org/system/files/conference/usen
 
 ---
 
-![center h:500 w:1100](../assets/img/posts/rwccc.png)
+![center h:500 w:600](../assets/img/posts/rwccc.png)
 
 
 
@@ -133,7 +133,7 @@ Detailed Explanation [paper](https://www.usenix.org/system/files/conference/usen
 ### Multi-threaded R / W
 
 
-![center h:500 w:1100](../assets/img/posts/rwmtt.png)
+![center h:500 w:600](../assets/img/posts/rwmtt.png)
 
 ---
 
@@ -160,9 +160,9 @@ We use a set of FS metadata (parameters) as base, only changing 4 sets of attrib
 * FS used Image size  (100MB, 1GB, 100GB) [System Size]
 * Injected files size 1%, 20%, 100% but at most 200MB
 * File Size Distribution (Peak at : Small, Medium, Large Size files )
-  * Peak at Small $\mu = 4,  \text{MB}$
-  * Peak at Medium $\mu = 9.48, \ \text{MB}$
-  * Peak at Large $\mu = 17\ \text{MB}$
+  * Peak at Small \mu = 4,  MB
+  * Peak at Medium \mu = 9.48, MB
+  * Peak at Large \mu = 17, MB
 
 * Fragmentation Degree (score = 0, 0.5, 1)
 
