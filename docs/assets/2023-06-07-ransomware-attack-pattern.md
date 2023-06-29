@@ -9,8 +9,17 @@ thumbnail: /assets/img/posts/DFS.png
 keywords: undergraduate-research
 permalink: /blog/ransomware_attack_pattern
 usemathjax: true22
+marp : true
+theme : gaia 
+class : invert
 ---
 
+<style>
+img[alt~="center"] {
+  display: block;
+  margin: 0 auto;
+}
+</style>
 
 Slides are in 
 
@@ -20,12 +29,12 @@ Slides are in
 
 # Ransomware Attack Patterns & Attacked System's File Distribution
 
-1. Operation sequence of ransomware = N1 = 3
-2. R W type of each operation       = N2 = 4
-3. Characteristics of each R W type = N3 = 256
-4. File System Image for each attack patttern = N4 = 81
+1. Operation sequence of ransomware = $N1 = 3$ 
+2. R W type of each operation       = $N2 = 4$
+3. Characteristics of each R W type = $N3 = 256$
+4. File System Image for each attack patttern = $N4 = 81$
 
-\# Test cases (N) for each storage system :
+\# Test cases ($N$) for each storage system :
 
 $$
 N = N1 \times N2 \times N3 \times N4 = 248,832
