@@ -68,7 +68,7 @@ def handle_flags():
         
     return dateproc, ifRecover
 
-def proc_post(fpath):
+def proc_post(fpath, is_windows = False):
     """
     Process all the links to images in the post
     All images should have format :
@@ -86,7 +86,8 @@ def proc_post(fpath):
             if m:
                 imgpath = m.group(1)
                 # replace / with \
-                imgpath = imgpath.replace("/", "\\")
+                if is_windows:
+                    imgpath = imgpath.replace("/", "\\")
                 # check if the image exists
                 originalImgPath = os.path.join(os.path.dirname(fpath), imgpath)
                 if not os.path.exists(originalImgPath):
@@ -107,7 +108,7 @@ def proc_post(fpath):
     with open(fpath, "w", encoding="utf-8") as f:
         f.writelines(write_lines)
 
-def recover_post(fpath):
+def recover_post(fpath, is_windows = False):
     """
     Revert the effect done by proc_post.
     We should find all the image basename, and remove the shrink_ prefix.
@@ -121,8 +122,9 @@ def recover_post(fpath):
             m = re.search(r"!\[.*\]\((.*)\)", line)
             if m:
                 imgpath = m.group(1)
-                # replace / with \
-                imgpath = imgpath.replace("/", "\\")
+                if is_windows :
+                    # replace / with \
+                    imgpath = imgpath.replace("/", "\\")
                 # check if the image exists
                 originalImgPath = os.path.join(os.path.dirname(fpath), imgpath)
                 if not os.path.exists(originalImgPath):
