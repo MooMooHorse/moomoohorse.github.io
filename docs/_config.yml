@@ -26,11 +26,11 @@ urls:
 
 author_logo: profile.png
 author: moomoohorse
-author_bio: Hi, my name is Hao Ren. 
+author_bio: As I grow older, I felt my passion goes away. I see most people live with a template of their future.  
 author_email: "haor2@illinois.edu"
 author_location: UIUC
 author_website_url: "https://moomoohorse.com"
-typewrite-text: Welcom to my Blog Pages. I will write about topics related to ECE about hardware / software dev.
+typewrite-text: This site documents what happened in my professional life.
 hero_cover_img: sample_cover.jpg # replace this for changing homepage cover (eg. try cover.jpeg). Image should be in /assets/img
 
 # Experiences
